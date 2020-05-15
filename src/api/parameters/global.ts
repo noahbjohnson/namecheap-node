@@ -1,3 +1,5 @@
+import { IsDefined, IsIP, IsString, Length, MaxLength } from 'class-validator'
+
 /**
  * Namecheap API Global Parameters
  *
@@ -5,8 +7,6 @@
  * These parameters include information like APIUser, APIKey, etc., and should be present in all the requests.
  * @link https://www.namecheap.com/support/api/global-parameters/
  */
-import { IsDefined, IsIP, IsString, Length } from 'class-validator'
-
 export class GlobalRequestParameters {
   /**
    * Username required to access the API
@@ -21,7 +21,7 @@ export class GlobalRequestParameters {
    */
   @IsDefined()
   @IsString()
-  @Length(1, 50)
+  @MaxLength(50)
   ApiKey: string
 
   /**
@@ -29,7 +29,7 @@ export class GlobalRequestParameters {
    */
   @IsDefined()
   @IsString()
-  @Length(1, 80)
+  @MaxLength(80)
   Command: string
 
   /**
@@ -37,7 +37,7 @@ export class GlobalRequestParameters {
    */
   @IsDefined()
   @IsString()
-  @Length(1, 20)
+  @MaxLength(20)
   UserName: string
 
   /**
@@ -48,4 +48,13 @@ export class GlobalRequestParameters {
   @Length(1, 15)
   @IsIP(4)
   ClientIp: string
+}
+
+export enum SortBy {
+  'NAME',
+  'NAME_DESC',
+  'EXPIREDATE',
+  'EXPIREDATE_DESC',
+  'CREATEDATE',
+  'CREATEDATE_DESC'
 }
